@@ -41,10 +41,10 @@ class SignUp extends StatelessWidget{
                 ],
               );
             }),
-            child: Container (
+            child: const SizedBox (
               width: 300,
               height: 50,
-              child: const Center (
+              child: Center (
               child: Text('Sign Up',
                 style: TextStyle(
                   color: Colors.white,
