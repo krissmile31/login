@@ -1,6 +1,9 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lottie/lottie.dart';
+import 'package:page_transition/page_transition.dart';
 
 import 'Login.dart';
 import 'SignUp.dart';
@@ -16,10 +19,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: const MyHomePage(),
+      home: AnimatedSplashScreen(
+        splash: Lottie.asset('assets/images/intro.json',),
+        nextScreen: const MyHomePage(),
+        splashTransition: SplashTransition.scaleTransition,
+        duration: 10,
+        pageTransitionType: PageTransitionType.bottomToTop,
+      ),
     );
   }
 }
@@ -28,21 +38,48 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(length: 2,
-    child: Scaffold(
+    return Scaffold(
       appBar: AppBar(
         leading: const Icon(Icons.home),
         title: const Text('Home Page'),
         centerTitle: true,
-
-        // bottom: const TabBar(
-        //   tabs: [
-        //     Tab(text: 'Login', icon: Icon(Icons.login)),
-        //     Tab(text: 'Sign Up', icon: Icon(Icons.wifi),)
-        //   ],
-        // ),
       ),
-      body: Login(),
+      body: Container(
+        margin: const EdgeInsets.all(50),
+        alignment: Alignment.center,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Lottie.asset('assets/images/intro.json'),
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 80, 0, 20),
+          width: double.infinity,
+          height: 45,
+          child: RaisedButton(
+            color: const Color(0xFF7B1FA2),
+            onPressed: () => showDialog(context: context, builder: (BuildContext context) {
+              return const Login();
+            }),
+            child: const Text('Login',
+              style: TextStyle(color: Colors.white,
+                  fontSize: 20),),
+          ),
+        ),
+
+        Container(
+          width: double.infinity,
+          height: 45,
+          child: RaisedButton(
+            color: Colors.white,
+            onPressed: () => showDialog(context: context, builder: (BuildContext context) {
+              return const SignUp();
+            }),
+            child: const Text('Sign Up',
+              style: TextStyle(fontSize: 20),),
+          ),
+        )
+        ])
+      ),
 
       // body: const TabBarView(
       //   children: [
@@ -50,8 +87,8 @@ class MyHomePage extends StatelessWidget {
       //     // SignUp(),
       //   ],
       // ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+      ); // This trailing comma makes auto-formatting nicer for build methods.
+
   }
 }
 

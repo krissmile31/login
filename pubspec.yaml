@@ -29,6 +29,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  animated_splash_screen: ^1.2.0
+  flutter_gradient_colors: ^2.1.1
+  lottie: ^1.2.2
+  page_transition: ^2.0.5
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -60,8 +64,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - assets/images/login.png
-     - assets/images/signup.png
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
